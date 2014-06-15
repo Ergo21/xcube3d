@@ -42,7 +42,6 @@
 #include "ShaderManager.h"
 
 /* ENGINE DEFAULT SETTINGS */
-static const std::string DEFAULT_WINDOW_TITLE = "The X-CUBE 3D Game Engine";
 static const int DEFAULT_WINDOW_WIDTH = 800;
 static const int DEFAULT_WINDOW_HEIGHT = 600;
 
@@ -51,11 +50,11 @@ static const SDL_Color SDL_COLOR_YELLOW = { 0xFF, 0xFF, 0 };
 static const SDL_Color SDL_COLOR_RED	= { 0xFF, 0, 0 };
 static const SDL_Color SDL_COLOR_GREEN	= { 0, 0xFF, 0 };
 static const SDL_Color SDL_COLOR_BLUE	= { 0, 0, 0xFF };
-static const SDL_Color SDL_COLOR_BLACK = { 0, 0, 0 };
-static const SDL_Color SDL_COLOR_WHITE = { 0xFF, 0xFF, 0xFF };
-static const SDL_Color SDL_COLOR_AQUA = { 0, 0xFF, 0xFF };
+static const SDL_Color SDL_COLOR_BLACK  = { 0, 0, 0 };
+static const SDL_Color SDL_COLOR_WHITE  = { 0xFF, 0xFF, 0xFF };
+static const SDL_Color SDL_COLOR_AQUA   = { 0, 0xFF, 0xFF };
 static const SDL_Color SDL_COLOR_ORANGE = { 0xFF, 0xA5, 0 };
-static const SDL_Color SDL_COLOR_PINK = { 0xFF, 0xC0, 0xCB };
+static const SDL_Color SDL_COLOR_PINK   = { 0xFF, 0xC0, 0xCB };
 static const SDL_Color SDL_COLOR_PURPLE = { 0x80, 0, 0x80 };
 static const SDL_Color SDL_COLOR_VIOLET = { 0xEE, 0x82, 0xEE };
 
@@ -155,6 +154,17 @@ class GraphicsEngine {
 		* Call this method after you have finished drawing
 		*/
 		void showScreen();
+    
+        /**
+         * Shows a message box with given info and title
+         *
+         * Note: this function will block the execution on
+         * thread where it was called
+         *
+         * @param info - the info to be shown
+         * @param title - title of the message box, may be left out
+         */
+        void showInfoMessageBox(const std::string & info, const std::string & title = "");
 
 		/**
 		 * Draws a GL Texture in a 2D screen space

@@ -1,7 +1,7 @@
 #include "GraphicsEngine.h"
 
 GraphicsEngine::GraphicsEngine() : fpsAverage(0), fpsPrevious(0), fpsStart(0), fpsEnd(0) {
-	window = SDL_CreateWindow(DEFAULT_WINDOW_TITLE.c_str(),
+	window = SDL_CreateWindow("Powered by X-CUBE 3D Engine",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT,
 		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
@@ -89,6 +89,10 @@ void GraphicsEngine::setWindowIcon(const char *iconFileName) {
 
 void GraphicsEngine::setFullscreen(bool b) {
 	SDL_SetWindowFullscreen(window, b ? SDL_WINDOW_FULLSCREEN_DESKTOP : SDL_WINDOW_MAXIMIZED);
+}
+
+void GraphicsEngine::showInfoMessageBox(const std::string & info, const std::string & title) {
+	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, title.c_str(), info.c_str(), window);
 }
 
 void GraphicsEngine::setWindowSize(const int &w, const int &h) {
