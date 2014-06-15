@@ -3,8 +3,11 @@
 std::shared_ptr<GameEngine> GameEngine::instance = nullptr;
 
 GameEngine::GameEngine() {
-	std::cout << "Initializing " << DEFAULT_WINDOW_TITLE << " v" << _ENGINE_VERSION_MAJOR
-		<< "." << _ENGINE_VERSION_MINOR << " by Almas" << std::endl;
+	std::cout << "Initializing X-CUBE 3D v"
+        << _ENGINE_VERSION_MAJOR
+		<< "." << _ENGINE_VERSION_MINOR
+        << "." << _ENGINE_VERSION_PATCH
+        << " by Almas" << std::endl;
 
 #ifdef __DEBUG
 	#if defined(_WIN32)
@@ -22,6 +25,10 @@ GameEngine::GameEngine() {
 #ifdef __DEBUG
 	debug("SDL_Init() successful");
 #endif
+    
+    std::cout << "Logical CPU cores: " << SDL_GetCPUCount() << std::endl;
+	std::cout << "System RAM: " << SDL_GetSystemRAM() << " MB" << std::endl;
+	std::cout << "Running on: " << SDL_GetPlatform() << std::endl;
 
 	SDL_version compiled, linked;
 	SDL_VERSION(&compiled);
