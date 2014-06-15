@@ -51,12 +51,6 @@ GraphicsEngine::~GraphicsEngine() {
 void GraphicsEngine::initGL() {
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-	if (SDL_GL_SetSwapInterval(0) < 0) {	// on NVIDIA drivers setting to 1 causes high cpu load
-#ifdef __DEBUG
-		debug("Warning: SDL_GL_SetSwapInterval() mode isn't supported");
-#endif
-	}
 }
 
 void GraphicsEngine::setWindowTitle(const char * title) {
@@ -89,6 +83,14 @@ void GraphicsEngine::setWindowIcon(const char *iconFileName) {
 
 void GraphicsEngine::setFullscreen(bool b) {
 	SDL_SetWindowFullscreen(window, b ? SDL_WINDOW_FULLSCREEN_DESKTOP : SDL_WINDOW_MAXIMIZED);
+}
+
+void GraphicsEngine::setVerticalSync(bool b) {
+    if (SDL_GL_SetSwapInterval(b ? 1 : 0) < 0) {	// on NVIDIA drivers setting to 1 causes high cpu load
+#ifdef __DEBUG
+		debug("Warning: SDL_GL_SetSwapInterval() mode isn't supported");
+#endif
+	}
 }
 
 void GraphicsEngine::showInfoMessageBox(const std::string & info, const std::string & title) {

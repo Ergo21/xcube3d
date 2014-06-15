@@ -189,6 +189,7 @@ class GraphicsEngine {
 		void setWindowTitle(const char *title);
 		void setWindowTitle(const std::string &);
 		void setFullscreen(bool);
+        void setVerticalSync(bool);
 
 		Dimension2i getWindowSize();
 		/**
