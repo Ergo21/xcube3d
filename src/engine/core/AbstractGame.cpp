@@ -1,14 +1,14 @@
 #include "AbstractGame.h"
 
 AbstractGame::AbstractGame() : running(true), gameTime(0.0) {
-	std::shared_ptr<GameEngine> engine = GameEngine::getInstance();
+	std::shared_ptr<GameEngine> xcEngine = GameEngine::getInstance();
 
 	// engine ready, get subsystems
-	gfx = engine->getGraphicsEngine();
-	sfx = engine->getAudioEngine();
-	eventSystem = engine->getEventEngine();
-	physics = engine->getPhysicsEngine();
-	camera = gfx->getCamera();
+	xcGraphics = xcEngine->getGraphicsEngine();
+	xcAudio    = xcEngine->getAudioEngine();
+	xcInput    = xcEngine->getEventEngine();
+	xcPhysics  = xcEngine->getPhysicsEngine();
+	xcCamera   = xcGraphics->getCamera();
 }
 
 AbstractGame::~AbstractGame() {
@@ -19,9 +19,11 @@ AbstractGame::~AbstractGame() {
 	// kill Game class' instance pointers
 	// so that engine is isolated from the outside world
 	// before shutting down
-	camera.reset();
-	gfx.reset();
-	eventSystem.reset();
+	xcCamera.reset();
+	xcGraphics.reset();
+    xcAudio.reset();
+	xcInput.reset();
+    xcPhysics.reset();
 
 	// kill engine
 	GameEngine::quit();
@@ -39,10 +41,10 @@ int AbstractGame::runMainLoop() {
 #endif
 
 	while (running) {
-		gfx->setFrameStart();
-		eventSystem->pollEvents();
+		xcGraphics->setFrameStart();
+		xcInput->pollEvents();
 
-		if (eventSystem->isPressed(Key::ESC) || eventSystem->isPressed(Key::QUIT))
+		if (xcInput->isPressed(Key::ESC) || xcInput->isPressed(Key::QUIT))
 			running = false;
 
 		handleKeyEvents();
@@ -50,16 +52,16 @@ int AbstractGame::runMainLoop() {
 
 		update();
 		updatePhysics();
-		camera->updateView();
+		xcCamera->updateView();
 
 		gameTime += 0.016;	// 60 times a sec
 
-		gfx->clearScreen();
+		xcGraphics->clearScreen();
 		render();
 		renderUI();
-		gfx->showScreen();
+		xcGraphics->showScreen();
 
-		gfx->adjustFPSDelay(16);	// atm hardcoded to ~60 FPS
+		xcGraphics->adjustFPSDelay(16);	// atm hardcoded to ~60 FPS
 	}
 
 #ifdef __DEBUG
@@ -70,14 +72,18 @@ int AbstractGame::runMainLoop() {
 }
 
 void AbstractGame::handleMouseEvents() {
-	if (eventSystem->isPressed(Mouse::BTN_LEFT)) onLeftMouseButton();
-	if (eventSystem->isPressed(Mouse::BTN_RIGHT)) onRightMouseButton();
+	if (xcInput->isPressed(Mouse::BTN_LEFT)) onLeftMouseButton();
+	if (xcInput->isPressed(Mouse::BTN_RIGHT)) onRightMouseButton();
 }
 
 void AbstractGame::updatePhysics() {
-	physics->update();
+	xcPhysics->update();
 }
 
+void AbstractGame::handleKeyEvents() {}
 void AbstractGame::onLeftMouseButton() {}
 void AbstractGame::onRightMouseButton() {}
+
+void AbstractGame::update() {}
+void AbstractGame::render() {}
 void AbstractGame::renderUI() {}

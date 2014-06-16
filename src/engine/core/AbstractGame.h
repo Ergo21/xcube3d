@@ -13,23 +13,23 @@ class AbstractGame {
 		virtual ~AbstractGame();
 
 		/* ENGINE OBJECTS */
-		std::shared_ptr<GraphicsEngine> gfx;
-		std::shared_ptr<AudioEngine> sfx;
-		std::shared_ptr<EventEngine> eventSystem;
-		std::shared_ptr<PhysicsEngine> physics;
-		std::shared_ptr<Camera> camera;
+		std::shared_ptr<GraphicsEngine> xcGraphics;
+		std::shared_ptr<AudioEngine>    xcAudio;
+		std::shared_ptr<EventEngine>    xcInput;
+		std::shared_ptr<PhysicsEngine>  xcPhysics;
+		std::shared_ptr<Camera>         xcCamera;
 
 		/* Main loop control */
 		bool running;
 		double gameTime;
 
-		virtual void handleKeyEvents() = 0;
+		virtual void handleKeyEvents();
 
 		virtual void onLeftMouseButton();
 		virtual void onRightMouseButton();
 
-		virtual void update() = 0;
-		virtual void render() = 0;
+		virtual void update();
+		virtual void render();
 
 		virtual void renderUI();
 	public:
