@@ -33,6 +33,7 @@
 
 #define _ENGINE_VERSION_MAJOR 0
 #define _ENGINE_VERSION_MINOR 2
+#define _ENGINE_VERSION_PATCH 1
 
 class GameEngine {
 	private:
