@@ -1,4 +1,4 @@
-bin_PROGRAMS = XCApp
+bin_PROGRAMS = XCDemoApp
 
 XCApp_SOURCES = src/engine/audio/AudioEngine.cpp
 XCApp_SOURCES += src/engine/core/GameEngine.cpp src/engine/core/Debug.cpp src/engine/core/ResourceManager.cpp src/engine/core/Timer.cpp
@@ -8,6 +8,7 @@ XCApp_SOURCES += src/engine/physics/PhysicsEngine.cpp
 
 XCApp_SOURCES += src/engine/core/AbstractGame.cpp
 
+XCApp_SOURCES += src/demo/Main.cpp src/demo/DemoApp.cpp
 
 AM_CPPFLAGS = -std=c++11
 AM_CPPFLAGS += $(gl_CFLAGS) $(glew_CFLAGS) $(sdl2_CFLAGS)
